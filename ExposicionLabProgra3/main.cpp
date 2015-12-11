@@ -1,16 +1,18 @@
 #include <iostream>
 
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_native_dialog.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_primitives.h>
+#include "allegro5/allegro.h"
+#include "allegro5/allegro_image.h"
+#include "allegro5/allegro_native_dialog.h"
+#include "allegro5/allegro_audio.h"
+#include "allegro5/allegro_acodec.h"
+#include "allegro5/allegro_font.h"
+#include "allegro5/allegro_ttf.h"
+#include "allegro5/allegro_primitives.h"
+#include "allegro5/joystick.h"
 #include <vector>
 #include <string>
 #include <sstream>
+
 
 #define WHITE makecol(255, 255, 255)
 
@@ -33,15 +35,16 @@ ALLEGRO_SAMPLE_ID ieffect;
 ALLEGRO_SAMPLE_ID igame;
 
 ALLEGRO_KEYBOARD_STATE keystate;
+ALLEGRO_JOYSTICK_STATE joystate;
 //ALLEGRO_BITMAP *buffer = create_bitmap(320, 240); // initialize the double buffer
 ALLEGRO_BITMAP *bouncer = NULL;
 
 ALLEGRO_BITMAP *personajes[8];
 
 int width = 500, height = 250;
-const float FPS = 40;
+const float FPS = 600;
 const int BOUNCER_SIZE = 32;
-int seconds = 1, timer2 = 0, velocity = 5, x = 0, y = 0, personaje = 0;
+int seconds = 1, timer2 = 0, velocity = 3, x = 0, y = 0, personaje = 0;
 string  edittext;                         // an empty string for editting
 string::iterator iter = edittext.begin(); // string iterator
 int caret  = 0;                       // tracks the text caret
@@ -96,12 +99,16 @@ int initAllegro()
         cout<<"Failed to initialize the mouse!\n"<<endl;
         return -1;
     }
+    if(!al_install_joystick())
+    {
+        cout<<"Joystick FUGGED UP AAAAAA~\n"<<endl;
+    }
 
     al_init_image_addon();
     al_init_primitives_addon();
     al_init_font_addon(); // initialize the font addon
     al_init_ttf_addon();// initialize the ttf (True Type Font) addon
-    cout<<"Llego hasta aqui"<<endl;
+    //cout<<"Llego hasta aqui"<<endl;
 
 
     al_register_event_source(event_queue, al_get_display_event_source(display));//registrar eventos del display
@@ -116,7 +123,12 @@ int initAllegro()
 
 int main()
 {
+    /*al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_REQUIRE);*/
+    //al_set_new_display_option(ALLEGRO_SAMPLES, 4, ALLEGRO_SUGGEST);
+    al_set_new_display_option(ALLEGRO_VSYNC, 1,ALLEGRO_REQUIRE);
+
     initAllegro();
+
 
     enum Direction { DOWN = 0, LEFT = 2, RIGHT = 4, UP = 6 };
     int dir = DOWN, prevDir, index = 0;
@@ -153,16 +165,25 @@ int main()
     float bouncer_x = width / 2.0 - BOUNCER_SIZE / 2.0;
     float bouncer_y = height / 2.0 - BOUNCER_SIZE / 2.0;
 
+     ALLEGRO_JOYSTICK *butt = NULL;
+     butt = al_get_joystick(0);
 
     while(!done)
     {
         al_draw_bitmap(fondo, 0, 0, 0);
         bool get_event = al_wait_for_event_until(event_queue, &ev, &timeout);
         al_get_keyboard_state(&keystate);
+        al_get_joystick_state(al_get_joystick(0),&joystate);
 
         if(get_event && ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
             done = true;
+            return 0;
+        }
+        if(ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN)
+        {
+            //if(ev.joystick.button == 0)
+                cout<<"BUTT"<<endl;
         }
 
         else if(ev.type == ALLEGRO_EVENT_TIMER)
@@ -200,6 +221,8 @@ int main()
                 y+=velocity;
                 dir = DOWN;
             }
+            else if(al_key_down(&keystate,ALLEGRO_KEY_ESCAPE))
+                return 0;
             else
                 active = false;
 
@@ -337,7 +360,7 @@ int main()
             personaje=0;
 
         al_draw_bitmap(personajes[personaje], x, y, 100);*/
-        al_flip_display();
+        //al_flip_display();
 
     }
     return 0;

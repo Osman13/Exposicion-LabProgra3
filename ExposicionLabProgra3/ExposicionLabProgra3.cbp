@@ -4,13 +4,13 @@
 	<Project>
 		<Option title="ExposicionLabProgra3" />
 		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option compiler="copy_of_gnu_gcc_compiler" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/ExposicionLabProgra3" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="copy_of_gnu_gcc_compiler" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -19,7 +19,7 @@
 				<Option output="bin/Release/ExposicionLabProgra3" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="copy_of_gnu_gcc_compiler" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
@@ -31,7 +31,46 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="C:/Users/o/Documents/GitHub/Exposicion-LabProgra3/allegro5/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-static-libgcc -static-libstdc++" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_acodec-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_audio-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libvorbisfile-1.3.2-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libvorbis-1.3.2-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_color-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_dialog-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_font-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_image-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_memfile-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_physfs-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_primitives-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\liballegro_ttf-5.0.10-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libdumb-0.9.3-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libFLAC-1.2.1-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libfreetype-2.4.8-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libogg-1.2.1-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libzlib-1.2.5-static-mt.a" />
+			<Add library="C:\Users\o\Documents\GitHub\Exposicion-LabProgra3\allegro5\lib\libopenal-1.14-static-mt.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libgdiplus.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libuuid.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libkernel32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libwinmm.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libpsapi.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libopengl32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libglu32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libuser32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libcomdlg32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libgdi32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libshell32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libole32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libadvapi32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libws2_32.a" />
+			<Add library="C:\allegro MinGW\MinGW\lib\libshlwapi.a" />
+			<Add directory="C:/Users/o/Documents/GitHub/Exposicion-LabProgra3/allegro5/lib" />
+		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

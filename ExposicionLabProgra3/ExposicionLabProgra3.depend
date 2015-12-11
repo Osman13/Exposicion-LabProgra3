@@ -260,7 +260,7 @@
 1372649932 c:\program files (x86)\codeblocks\mingw\allegro5\include\allegro5\allegro_primitives.h
 	<allegro5/allegro.h>
 
-1449810329 source:c:\users\o\documents\github\exposicion-labprogra3\exposicionlabprogra3\main.cpp
+1449848230 source:c:\users\o\documents\github\exposicion-labprogra3\exposicionlabprogra3\main.cpp
 	<iostream>
 	"allegro5/allegro.h"
 	"allegro5/allegro_image.h"

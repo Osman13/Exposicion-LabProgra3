@@ -42,7 +42,7 @@ ALLEGRO_BITMAP *bouncer = NULL;
 ALLEGRO_BITMAP *personajes[8];
 
 int width = 500, height = 250;
-const float FPS = 600;
+const float FPS = 72;
 const int BOUNCER_SIZE = 32;
 int seconds = 1, timer2 = 0, velocity = 3, x = 0, y = 0, personaje = 0;
 string  edittext;                         // an empty string for editting
@@ -103,6 +103,11 @@ int initAllegro()
     {
         cout<<"Joystick FUGGED UP AAAAAA~\n"<<endl;
     }
+    if (al_get_num_joysticks() == 0)
+    {
+        cout<<"No joysticks found.\n"<<endl;
+    }
+
 
     al_init_image_addon();
     al_init_primitives_addon();
@@ -143,6 +148,7 @@ int main()
 
     fondo = al_load_bitmap("fondo.jpg");
 
+
     ALLEGRO_COLOR red_color = al_map_rgb(184, 22, 22);
     al_draw_filled_rectangle(3.0, 4.0, 17.0, 16.0, red_color);
 
@@ -165,26 +171,63 @@ int main()
     float bouncer_x = width / 2.0 - BOUNCER_SIZE / 2.0;
     float bouncer_y = height / 2.0 - BOUNCER_SIZE / 2.0;
 
-     ALLEGRO_JOYSTICK *butt = NULL;
+     ALLEGRO_JOYSTICK *butt;
      butt = al_get_joystick(0);
-
+     al_get_joystick_state(butt, &joystate);
+    al_register_event_source(event_queue, al_get_joystick_event_source());
+    bool buttonDown = false;
+    int currentButton;
     while(!done)
     {
-        al_draw_bitmap(fondo, 0, 0, 0);
+        al_draw_bitmap(fondo, 0, 0, ALLEGRO_FLIP_VERTICAL);
+
         bool get_event = al_wait_for_event_until(event_queue, &ev, &timeout);
         al_get_keyboard_state(&keystate);
-        al_get_joystick_state(al_get_joystick(0),&joystate);
+        al_get_joystick_state(butt,&joystate);
 
         if(get_event && ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
             done = true;
             return 0;
         }
-        if(ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN)
+        else if(ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN)
         {
-            //if(ev.joystick.button == 0)
-                cout<<"BUTT"<<endl;
+            cout<<"current button: "<<ev.joystick.button<<endl;
+            buttonDown = true;
+            currentButton = ev.joystick.button;
+            switch(ev.joystick.button)
+            {
+            case 0:
+                y+=velocity;
+                dir = DOWN;
+                break;
+            case 1:
+                x+=velocity;
+                dir = RIGHT;
+                break;
+            case 2:
+                x-=velocity;
+                dir = LEFT;
+                break;
+            case 3:
+                y-=velocity;
+                dir = UP;
+
+            }
+
         }
+        else if(ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_UP)
+        {
+            buttonDown = false;
+        }
+
+        else if(ev.type == ALLEGRO_EVENT_JOYSTICK_AXIS)
+        {
+            cout<<"Moving an axis"<<endl;
+            x+=ev.joystick.pos*10;
+            y+=ev.joystick.pos*10;
+        }
+
 
         else if(ev.type == ALLEGRO_EVENT_TIMER)
         {
@@ -240,6 +283,44 @@ int main()
             draw = true;
         }
 
+    if(buttonDown)
+    {
+            active = true;
+            prevDir = dir;
+            switch(currentButton)
+            {
+            case 0:
+                y+=velocity;
+                dir = DOWN;
+                break;
+            case 1:
+                x+=velocity;
+                dir = RIGHT;
+                break;
+            case 2:
+                x-=velocity;
+                dir = LEFT;
+                break;
+            case 3:
+                y-=velocity;
+                dir = UP;
+
+            }
+            if(active)
+                index++;
+            else
+            index = dir + 1;
+
+            if(index >= dir + 2)
+                index = dir;
+
+            if(dir != prevDir)
+                index = dir;
+
+            draw = true;
+    }
+
+
     if(draw)
     {
         al_draw_bitmap(personajes[index], x, y, NULL);
@@ -266,6 +347,8 @@ int main()
         al_play_sample(effect, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, 0);
         y+=velocity;
     }
+
+
 
     /*do
     {

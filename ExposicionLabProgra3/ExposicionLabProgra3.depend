@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1449770470 source:c:\users\olman\documents\osman oliva unitec\programación iii\exposicionlabprogra3\main.cpp
+1449649306 source:c:\users\olman\documents\osman oliva unitec\programación iii\exposicionlabprogra3\main.cpp
 	<iostream>
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
@@ -10,7 +10,6 @@
 	<allegro5/allegro_ttf.h>
 	<allegro5/allegro_primitives.h>
 	<vector>
-	<string>
 	<sstream>
 
 1372649932 c:\program files (x86)\codeblocks\mingw\allegro5\include\allegro5\allegro.h
@@ -259,4 +258,29 @@
 
 1372649932 c:\program files (x86)\codeblocks\mingw\allegro5\include\allegro5\allegro_primitives.h
 	<allegro5/allegro.h>
+
+1449859686 source:c:\users\roberto\documents\programacion iii\exposicionlabprogra3\main.cpp
+	<iostream>
+	<allegro5/allegro.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro_audio.h>
+	<allegro5/allegro_acodec.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_primitives.h>
+	<vector>
+	<string>
+	<sstream>
+	"Math.h"
+	"rotateTexture.h"
+	<fstream>
+	<string>
+	<sstream>
+
+1449848118 c:\users\roberto\documents\programacion iii\exposicionlabprogra3\rotatetexture.h
+	"Math.h"
+
+1449848079 source:c:\users\roberto\documents\programacion iii\exposicionlabprogra3\rotatetexture.cpp
+	"rotateTexture.h"
 
